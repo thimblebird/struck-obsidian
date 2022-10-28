@@ -1,0 +1,35 @@
+{
+  "text.config.struckobsidian.title": [
+    "",
+    { "text": "Struck Obsidian", "color": "#8308E4" },
+    " Configuration"
+  ],
+  "text.config.struckobsidian.section.sectionConversionConfiguration": "Spreading",
+  "text.config.struckobsidian.option.secondStrikeSourceBlockBehavior": "Source block behavior on second strike",
+  "text.config.struckobsidian.option.secondStrikeSourceBlockBehavior.value.none": "None",
+  "text.config.struckobsidian.option.secondStrikeSourceBlockBehavior.value.destroy": "Destroy",
+  "text.config.struckobsidian.option.secondStrikeSourceBlockBehavior.value.drop": "Drop",
+  "text.config.struckobsidian.category.spreadBranches": "Number of spreading branches to spawn",
+  "text.config.struckobsidian.option.spreadBranches.minSpreadBranches": "Minimum spreading branches",
+  "text.config.struckobsidian.option.spreadBranches.maxSpreadBranches": "Maximum spreading branches",
+
+  "text.config.struckobsidian.category.spreadAttempts": "Attempts to spread when struck by lightning",
+  "text.config.struckobsidian.option.spreadAttempts.minSpreadAttempts": "Minimum attempts to spread",
+  "text.config.struckobsidian.option.spreadAttempts.maxSpreadAttempts": "Maximum attempts to spread",
+
+  "text.config.struckobsidian.category.spreadAfterAttempts": "Attempts after which to start spreading",
+  "text.config.struckobsidian.option.spreadAfterAttempts.minSpreadAfterAttempts": "Minimum attempts to start",
+  "text.config.struckobsidian.option.spreadAfterAttempts.maxSpreadAfterAttempts": "Maximum attempts to start",
+
+  "text.config.struckobsidian.category.spreadDirectionsAllowlist": "Allowlist: Spread directions",
+  "text.config.struckobsidian.option.spreadDirectionsAllowlist.spreadDirectionDown": "Down",
+  "text.config.struckobsidian.option.spreadDirectionsAllowlist.spreadDirectionUp": "Up",
+  "text.config.struckobsidian.option.spreadDirectionsAllowlist.spreadDirectionNorth": "North",
+  "text.config.struckobsidian.option.spreadDirectionsAllowlist.spreadDirectionSouth": "South",
+  "text.config.struckobsidian.option.spreadDirectionsAllowlist.spreadDirectionWest": "West",
+  "text.config.struckobsidian.option.spreadDirectionsAllowlist.spreadDirectionEast": "East",
+
+  "text.config.struckobsidian.section.sectionDebugConfiguration": "Debugging",
+  "text.config.struckobsidian.option.debugSourceGlassBlock": "Convert glass blocks to Crying Obsidian",
+  "text.config.struckobsidian.option.debugLogAttempts": "Log spreading attempts"
+}

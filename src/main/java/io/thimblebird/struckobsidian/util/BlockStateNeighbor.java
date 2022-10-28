@@ -8,19 +8,15 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import static io.thimblebird.struckobsidian.StruckObsidian.CONFIG;
 import static io.thimblebird.struckobsidian.StruckObsidian.LOGGER;
 
 @SuppressWarnings("unused")
 public class BlockStateNeighbor {
-    public List<Direction> DIRECTIONS_WHITELIST = List.of(
-            Direction.DOWN,
-            Direction.NORTH,
-            Direction.SOUTH,
-            Direction.WEST,
-            Direction.EAST
-    );
+    public List<Direction> DIRECTIONS_ALLOWLIST;
 
     private World world;
     public BlockPos pos;
@@ -38,6 +34,14 @@ public class BlockStateNeighbor {
     private void init(@NotNull World world, @NotNull BlockPos pos, Direction direction, int offset, int attempts) {
         this.sourceState = world.getBlockState(pos);
         this.world = world;
+
+        DIRECTIONS_ALLOWLIST = new ArrayList<>();
+        if (CONFIG.spreadDirectionsAllowlist.spreadDirectionDown())    DIRECTIONS_ALLOWLIST.add(Direction.DOWN);
+        if (CONFIG.spreadDirectionsAllowlist.spreadDirectionUp())      DIRECTIONS_ALLOWLIST.add(Direction.UP);
+        if (CONFIG.spreadDirectionsAllowlist.spreadDirectionNorth())   DIRECTIONS_ALLOWLIST.add(Direction.NORTH);
+        if (CONFIG.spreadDirectionsAllowlist.spreadDirectionSouth())   DIRECTIONS_ALLOWLIST.add(Direction.SOUTH);
+        if (CONFIG.spreadDirectionsAllowlist.spreadDirectionWest())    DIRECTIONS_ALLOWLIST.add(Direction.WEST);
+        if (CONFIG.spreadDirectionsAllowlist.spreadDirectionEast())    DIRECTIONS_ALLOWLIST.add(Direction.EAST);
 
         this
                 .setPos(pos)
@@ -118,12 +122,25 @@ public class BlockStateNeighbor {
             BlockPos nextPos = pos.offset(direction, offset);
             setPos(nextPos);
 
-            LOGGER.info("ATTEMPT " + attemptsCount + ": [" + getPos().toShortString() + "]");
+            if (CONFIG.debugLogAttempts()) {
+                LOGGER.info("ATTEMPT " + attemptsCount + ": [" + getPos().toShortString() + "]");
+            }
 
             return getBlock(nextPos);
         }
 
         return null;
+    }
+
+    public void skipNextBlock() {
+        if (attemptsRemaining > 0) {
+            --attemptsRemaining;
+            updateAttemptsCount();
+
+            if (CONFIG.debugLogAttempts()) {
+                LOGGER.info("ATTEMPT " + attemptsCount + " SKIPPED: [" + getPos().toShortString() + "]");
+            }
+        }
     }
 
     public Block getPrevBlock() {
@@ -133,17 +150,15 @@ public class BlockStateNeighbor {
         BlockPos prevPos = pos.offset(direction, -offset);
         setPos(prevPos);
 
-        LOGGER.info("ATTEMPT " + attemptsCount + ": [" + getPos().toShortString() + "]");
-
         return getBlock(prevPos);
     }
 
-    public void setDirectionsWhitelist(List<Direction> whitelist) {
-        DIRECTIONS_WHITELIST = whitelist;
+    public void setDirectionsAllowlist(List<Direction> allowlist) {
+        DIRECTIONS_ALLOWLIST = allowlist;
     }
 
     public void setDirectionsHorizontal() {
-        DIRECTIONS_WHITELIST = List.of(
+        DIRECTIONS_ALLOWLIST = List.of(
                 Direction.NORTH,
                 Direction.SOUTH,
                 Direction.WEST,
@@ -152,7 +167,7 @@ public class BlockStateNeighbor {
     }
 
     public void setDirectionsVertical() {
-        DIRECTIONS_WHITELIST = List.of(
+        DIRECTIONS_ALLOWLIST = List.of(
                 Direction.UP,
                 Direction.DOWN
         );
