@@ -4,9 +4,7 @@
   "package": "io.thimblebird.struckobsidian.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "LightningEntityMixin"
-  ],
-  "client": [
+    "LightningRodBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1
