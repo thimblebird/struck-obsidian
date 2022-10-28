@@ -14,4 +14,4 @@
 - converts obsidian to crying obsidian when lightning strikes the rod
 - placing down multiple obsidian blocks underneath the rod has a chance of converting more blocks
 - change the source block behaviour when lightning strikes again: `NONE` or `DESTROY`
-- branch and spreading parameters can be adjusted to your liking
+- branching and spreading parameters can be adjusted to your liking
